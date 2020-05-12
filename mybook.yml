@@ -1,7 +1,7 @@
 ---
 - name: Network get info
   connection: network_cli
-  hosts: cisco
+  hosts: cisco    # 指定inventory里的host或host group
   tasks:
     - name: Get cofig
       ios_facts:    # module
