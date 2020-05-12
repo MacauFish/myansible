@@ -3,7 +3,7 @@
   connection: network_cli
   hosts: cisco    # 指定inventory里的host或host group
   tasks:
-    - name: Get cofig
+    - name: Get config
       ios_facts:    # module
         gather_subset: all
         
@@ -16,4 +16,4 @@
           
     - name: Config hostname
       ios_system:   # module
-        hostname: "{{ inventory_hostname }}" 
+        hostname: "{{ inventory_hostname }}"   # 根据inventory里定义的hostname
