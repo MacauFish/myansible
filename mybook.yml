@@ -17,3 +17,14 @@
     - name: Config hostname
       ios_system:   # module
         hostname: "{{ inventory_hostname }}"   # 根据inventory里定义的hostname
+        
+    - name: show run
+      ios_command:
+        commands:
+          - show run
+      register: config  # 注冊變量config，給其他task調用
+      
+    - name: Save output to file
+      copy:
+        content: "{{ config.stdout[0] }}"  # 調用上一個task的變量config
+        dest: "/home/pi/ansible/config/{{ inventory_hostname }}.txt"
