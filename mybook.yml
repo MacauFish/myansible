@@ -4,14 +4,16 @@
   hosts: cisco
   tasks:
     - name: Get cofig
-      ios_facts:
+      ios_facts:    # module
         gather_subset: all
+        
     - name: Display hostname
-      debug:
+      debug:        # module
         msg: 
           - "The hostname is: {{ ansible_net_hostname }}"
           - "The model is: {{ ansible_net_serialnum }}"
           - "{{ ansible_net_all_ipv4_addresses }}"
+          
     - name: Config hostname
-      ios_system:
+      ios_system:   # module
         hostname: "{{ inventory_hostname }}" 
