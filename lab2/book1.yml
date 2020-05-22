@@ -1,0 +1,23 @@
+---
+- name: Use decrypt password
+  hosts: cisco
+  gather_facts: no
+  vars_files:
+    - cisco_vars.yml
+  tasks:
+    - name: Test Ping
+      ping:
+      tags: test
+    
+    - name: Gather facts
+      ios_facts:
+        gather_subset: all
+      tags: sysinfo
+    
+    - name: Set dns & ntp
+      ios_config:
+        lines:
+          - ntp server {{ switch.ntp }}
+          - ip name-server {{ switch.dns }}
+      tags: setting
+
